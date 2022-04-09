@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bankslife.backend.domain.Categoria;
+import br.com.bankslife.backend.domains.Categoria;
 import br.com.bankslife.backend.services.CategoriaService;
 
 @RestController

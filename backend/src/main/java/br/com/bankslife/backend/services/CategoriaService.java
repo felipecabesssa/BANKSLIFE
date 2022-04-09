@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.bankslife.backend.domain.Categoria;
+import br.com.bankslife.backend.domains.Categoria;
 import br.com.bankslife.backend.repositories.CategoriaRepository;
 
 @Service
