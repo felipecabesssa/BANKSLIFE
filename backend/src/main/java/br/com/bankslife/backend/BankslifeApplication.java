@@ -1,5 +1,6 @@
 package br.com.bankslife.backend;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,12 @@ import br.com.bankslife.backend.domains.Cidade;
 import br.com.bankslife.backend.domains.Cliente;
 import br.com.bankslife.backend.domains.Endereco;
 import br.com.bankslife.backend.domains.Estado;
+import br.com.bankslife.backend.domains.Pagamento;
+import br.com.bankslife.backend.domains.PagamentoComBoleto;
+import br.com.bankslife.backend.domains.PagamentoComCartao;
+import br.com.bankslife.backend.domains.Pedido;
 import br.com.bankslife.backend.domains.Produto;
+import br.com.bankslife.backend.domains.enums.EstadoPagamento;
 import br.com.bankslife.backend.domains.enums.TipoCliente;
 import br.com.bankslife.backend.repositories.CategoriaRepository;
 import br.com.bankslife.backend.repositories.CidadeRepository;
@@ -95,6 +101,14 @@ public class BankslifeApplication implements CommandLineRunner{
 		
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		Pedido ped1 = new Pedido(null, sdf.parse("09/04/2022 22:22"), cli1, e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("03/03/2022 10:10"), cli1, e2);
+		
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("13/03/2022"), null);
 	}
 
 }
