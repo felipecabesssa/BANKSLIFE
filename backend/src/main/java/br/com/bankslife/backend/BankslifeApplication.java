@@ -25,6 +25,8 @@ import br.com.bankslife.backend.repositories.CidadeRepository;
 import br.com.bankslife.backend.repositories.ClienteRepository;
 import br.com.bankslife.backend.repositories.EnderecoRepository;
 import br.com.bankslife.backend.repositories.EstadoRepository;
+import br.com.bankslife.backend.repositories.PagamentoRepository;
+import br.com.bankslife.backend.repositories.PedidoRepository;
 import br.com.bankslife.backend.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -47,6 +49,12 @@ public class BankslifeApplication implements CommandLineRunner{
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -108,7 +116,16 @@ public class BankslifeApplication implements CommandLineRunner{
 		Pedido ped2 = new Pedido(null, sdf.parse("03/03/2022 10:10"), cli1, e2);
 		
 		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
-		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("13/03/2022"), null);
+		ped1.setPagamento(pagto1);
+		
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("13/03/2022 00:00"), null);
+		ped2.setPagamento(pagto2);
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
 	}
 
 }
