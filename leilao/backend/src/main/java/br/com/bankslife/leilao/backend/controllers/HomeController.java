@@ -19,7 +19,7 @@ public class HomeController {
 	@GetMapping("/home")
 	public String home(Model model) {
 			
-		List<Pedido> listaPedidos = daoPedido.recuperaTodosOsPedidos();
+		List<Pedido> listaPedidos = daoPedido.findAll();
 		model.addAttribute("listaPedidos", listaPedidos);
 		
 		return "home";
