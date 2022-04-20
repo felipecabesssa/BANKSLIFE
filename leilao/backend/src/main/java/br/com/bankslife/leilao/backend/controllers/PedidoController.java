@@ -1,7 +1,10 @@
 package br.com.bankslife.leilao.backend.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +28,10 @@ public class PedidoController {
 	}
 	
 	@PostMapping("novo")
-	public String novo(RequisicaoNovoPedidoDTO requisicao) {
+	public String novo(@Valid RequisicaoNovoPedidoDTO requisicao, BindingResult result) {
+		if(result.hasErrors()) {
+			return "pedido/formulario";
+		}
 		
 		Pedido pedido = requisicao.toPedido();
 		daoPedido.save(pedido);

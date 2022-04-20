@@ -1,12 +1,20 @@
 package br.com.bankslife.leilao.backend.dtos;
 
+import javax.validation.constraints.NotBlank;
+
 import br.com.bankslife.leilao.backend.domains.Pedido;
 
 public class RequisicaoNovoPedidoDTO {
 	
+	@NotBlank
 	private String nomeProduto;
+	
+	@NotBlank
 	private String urlProduto;
+	
+	@NotBlank
 	private String urlImagem;
+	
 	private String descricao;
 	
 	public String getNomeProduto() {
