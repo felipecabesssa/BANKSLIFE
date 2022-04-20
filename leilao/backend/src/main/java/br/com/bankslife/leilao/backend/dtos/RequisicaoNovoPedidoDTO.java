@@ -3,6 +3,7 @@ package br.com.bankslife.leilao.backend.dtos;
 import javax.validation.constraints.NotBlank;
 
 import br.com.bankslife.leilao.backend.domains.Pedido;
+import br.com.bankslife.leilao.backend.enums.StatusPedido;
 
 public class RequisicaoNovoPedidoDTO {
 	
@@ -48,6 +49,7 @@ public class RequisicaoNovoPedidoDTO {
 		pedido.setDescricao(descricao);
 		pedido.setUrlImagem(urlImagem);
 		pedido.setUrlProduto(urlProduto);
+		pedido.setStatus(StatusPedido.AGUARDANDO);
 		
 		return pedido;
 	}

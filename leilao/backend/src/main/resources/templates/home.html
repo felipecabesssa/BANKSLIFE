@@ -1,5 +1,5 @@
 <html lang="pt-BR">
-    
+
 <head th:replace="~{base :: head}"></head>
 
 <body class="bg-dark text-white">
@@ -13,16 +13,22 @@
 
         <nav class="navbar navbar-expand navbar-light d-flex justify-content-between mb-3 bg-dark">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active text-warning" href="">Todos</a>
-                <a class="nav-item nav-link text-warning" href="">Aguardando</a>
-                <a class="nav-item nav-link text-warning" href="">Aprovado</a>
-                <a class="nav-item nav-link text-warning" href="">Entregue</a>
+                <a th:classappend="${status} == 'null' ? 'active'" class="nav-item nav-link active text-warning" href="/home">Todos</a>
+                <a th:classappend="${status} == 'aguardando' ? 'active'" class="nav-item nav-link text-warning" href="/home/aguardando">Aguardando</a>
+                <a th:classappend="${status} == 'aprovado' ? 'active'" class="nav-item nav-link text-warning" href="/home/aprovado">Aprovado</a>
+                <a th:classappend="${status} == 'entregue' ? 'active'" class="nav-item nav-link text-warning" href="/home/entregue">Entregue</a>
             </div>
             <a href="/pedido/formulario"><button class="btn btn-outline-warning">Novo</button></a>
         </nav>
 
         <div class="card mb-3" th:each="pedido : ${listaPedidos}">
-            <div class="card-header text-dark" th:text="${pedido.nomeProduto}">Nome do produto</div>
+
+            <th:block th:switch = "${#strings.toString(pedido.status)}">
+                <div th:case="'AGUARDANDO'" class="card-header text-dark alert-warning" th:text="${pedido.nomeProduto}">Nome do produto</div>
+                <div th:case="'APROVADO'" class="card-header text-dark alert-success" th:text="${pedido.nomeProduto}">Nome do produto</div>
+                <div th:case="'ENTREGUE'" class="card-header text-dark alert-dark" th:text="${pedido.nomeProduto}">Nome do produto</div>
+            </th:block>
+
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-sm-8 mb-3">
