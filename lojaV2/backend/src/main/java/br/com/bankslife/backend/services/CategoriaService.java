@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.bankslife.backend.configs.ResourceNotFoundException;
 import br.com.bankslife.backend.entities.Categoria;
 import br.com.bankslife.backend.repositories.CategoriaRepository;
 
@@ -21,7 +22,7 @@ public class CategoriaService {
 	
 	public Categoria findById(Long id){
 		Optional<Categoria> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow( () -> new ResourceNotFoundException(id) );
 	}
 	
 	public Categoria save(Categoria categoria) {
