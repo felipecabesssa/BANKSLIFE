@@ -1,10 +1,18 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <div id="nav">
+    <MenuLeilao/>
+  </div>
   <router-view/>
 </template>
+
+<script>
+import MenuLeilao from './components/MenuLeilao.vue'
+export default {
+  components:{
+    MenuLeilao
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
