@@ -28,10 +28,10 @@ public class Categoria implements Serializable{
 	public Categoria() {
 	}
 
-	public Categoria(Long id, String name) {
+	public Categoria(Long id, String nome) {
 		super();
 		this.id = id;
-		this.nome = name;
+		this.nome = nome;
 	}
 
 	public Long getId() {
@@ -42,12 +42,12 @@ public class Categoria implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setName(String name) {
-		this.nome = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	@Override
