@@ -1,10 +1,20 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
   <router-view/>
+  <nav>
+    <Menu/>
+    <hr>
+  </nav>
+  
 </template>
+
+<script>
+import Menu from './components/Menu.vue'
+export default {
+  components:{
+    Menu
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -12,7 +22,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #f4c54c;
+  background-color: #0d1117;
 }
 
 nav {
@@ -23,8 +34,14 @@ nav {
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #f4c54c;
     }
+
+    text-decoration: none;
+  }
+
+  a:hover{
+    color: #f4c54c;
   }
 }
 </style>

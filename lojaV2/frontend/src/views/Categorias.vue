@@ -1,15 +1,16 @@
 <template>
-  <div class="home">
+  <div class="categorias">
     <img alt="Vue logo" src="../assets/logo.png" width="150">
-    <h1>Home</h1>
+    <h1>Categorias</h1>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'HomeView',
-  components: {
-  }
+
 }
 </script>
+
+<style>
+
+</style>

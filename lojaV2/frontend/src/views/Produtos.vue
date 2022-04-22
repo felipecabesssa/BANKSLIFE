@@ -1,15 +1,18 @@
 <template>
-  <div class="home">
+  <div class="produtos">
     <img alt="Vue logo" src="../assets/logo.png" width="150">
-    <h1>Home</h1>
+    <h1>Produtos</h1>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'HomeView',
-  components: {
-  }
+
 }
 </script>
+
+<style lang="scss" scoped>
+
+  
+
+</style>
