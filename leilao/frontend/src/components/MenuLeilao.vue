@@ -15,6 +15,9 @@
         <a class="nav-item nav-link active text-warning" href="">Entregue</a>
       </router-link>
     </div>
+    <router-link to="/">
+      <a href=""><button class="btn btn-outline-warning">Novo</button></a>
+    </router-link>
   </nav>
   <hr>
 
