@@ -1,9 +1,11 @@
 <template>
-  <router-view/>
+
   <nav>
     <Menu/>
     <hr>
   </nav>
+
+  <router-view/>
   
 </template>
 
@@ -18,7 +20,7 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -42,6 +44,10 @@ nav {
 
   a:hover{
     color: #f4c54c;
+  }
+
+  hr{
+    margin-bottom: -25px;
   }
 }
 </style>
