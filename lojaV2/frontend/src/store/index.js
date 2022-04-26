@@ -1,6 +1,7 @@
 // import { vuex } from 'vuex'
-import Axios from 'axios'
+// import Axios from 'axios'
 import { createStore } from 'vuex'
+import { store as produtos } from './../views/produtos'
 
 // export default createStore({
 //   state: {
@@ -35,25 +36,25 @@ const categorias = {
   }
 }
 
-const produtos = {
-  state: {
-    produtos:[]
-  },
+// const produtos = {
+//   state: {
+//     produtos:[]
+//   },
 
-  mutations:{
-    getProdutosM(state, payload){
-      state.produtos = payload
-    }
-  },
+//   mutations:{
+//     getProdutosM(state, payload){
+//       state.produtos = payload
+//     }
+//   },
 
-  actions:{
-    getProdutos({ commit }){
-      Axios.get('http://localhost:8081/produtos').then(resp => {
-        commit('getProdutosM', resp.data)
-      })
-    }
-  }
-}
+//   actions:{
+//     getProdutos({ commit }){
+//       Axios.get('http://localhost:8081/produtos').then(resp => {
+//         commit('getProdutosM', resp.data)
+//       })
+//     }
+//   }
+// }
 
 // const store = new vuex.Store({
 //   modules: {

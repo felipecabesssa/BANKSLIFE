@@ -1,6 +1,6 @@
 <template>
   <div class="principal">
-    <img alt="Vue logo" src="../assets/logo.png" width="150" />
+    <img alt="Vue logo" src="../../assets/logo.png" width="150" />
     
     <div class="principal">
       <h1>Produtos</h1>
@@ -22,7 +22,7 @@
           <li>
             <div class="dados" id="id">{{ dado.id }}</div>
             <div class="dados" id="nome">{{ dado.nome }}</div>
-            <div class="dados" id="estoque">{{ dado.estoque }}</div>
+            <div class="dados" id="estoque">{{ dado.quantidade }}</div>
             <div class="dados" id="preco">{{ dinheiro(dado.preco) }}</div>
           </li>
         </ul>
@@ -45,7 +45,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getProdutos']),
+    ...mapActions('produtos', ['getProdutos']),
     dinheiro(valor) {
       return "R$ " + valor.toFixed(2);
     },
