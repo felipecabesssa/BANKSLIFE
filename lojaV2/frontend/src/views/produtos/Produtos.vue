@@ -3,7 +3,10 @@
     <img alt="Vue logo" src="../../assets/logo.png" width="150" />
     
     <div class="principal">
-      <h1>Produtos</h1>
+      <div class="topo">
+        <h1>Produtos</h1>
+        <button class="btn btn-warning"><router-link class="link" to="/produtos-adiciona">Adicionar Produto</router-link></button>
+      </div>
       <hr />
 
       <div>
@@ -61,6 +64,20 @@ export default {
 
 <style lang="scss" scoped>
 .principal {
+  .topo{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    padding: 2%;
+    button{
+      padding: 5px;
+      max-height: 40px;
+    } 
+  }
+  .link{
+    text-decoration: none;
+    color: #000;
+  }
   ul {
     color: #2c3e50;
     list-style: none;

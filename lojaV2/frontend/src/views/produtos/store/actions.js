@@ -6,3 +6,9 @@ export const getProdutos = ({ commit }) => {
         commit(types.GET_PRODUTOS, resp.data)
     })
 }
+
+export const addProdutos = ({ commit }, add) => {
+    Axios.post('http://localhost:8081/produtos', add).then((resp) => {
+        commit(types.ADD_PRODUTOS, resp.data)
+    })
+}
