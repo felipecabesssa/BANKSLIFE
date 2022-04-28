@@ -2,6 +2,7 @@
 // import Axios from 'axios'
 import { createStore } from 'vuex'
 import { store as produtos } from './../views/produtos'
+import { store as categorias } from './../views/categorias'
 
 // export default createStore({
 //   state: {
@@ -30,11 +31,11 @@ import { store as produtos } from './../views/produtos'
 //   }
 // })
 
-const categorias = {
-  state: {
-    categorias:[]
-  }
-}
+// const categorias = {
+//   state: {
+//     categorias:[]
+//   }
+// }
 
 // const produtos = {
 //   state: {
