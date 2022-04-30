@@ -9,24 +9,31 @@
       </div>
       <hr />
 
-      <div>
+      <div class="container">
         <ul>
           <li>
             <div class="dados" id="id"><strong>Id</strong></div>
             <div class="dados" id="descricao"><strong>Descrição</strong></div>
             <div class="dados" id="estoque"><strong>Qtd</strong></div>
             <div class="dados" id="preco"><strong>Preço</strong></div>
+            <div class="dados" id="acao"><strong>Add</strong></div>
           </li>
         </ul>
       </div>
 
-      <div v-for="dado in produtos.produtos" :key="dado.id">
+      <div class="container" v-for="dado in produtos.produtos" :key="dado.id">
         <ul>
           <li>
             <div class="dados" id="id">{{ dado.id }}</div>
             <div class="dados" id="nome">{{ dado.nome }}</div>
             <div class="dados" id="estoque">{{ dado.quantidade }}</div>
             <div class="dados" id="preco">{{ dinheiro(dado.preco) }}</div>
+            <!-- <div class="dados" id="acao"></div> -->
+            <div class="dados btnDiv">
+              <router-link v-bind:to="{ name: 'atualiza', params: { id: dado.id } }">
+                <button class="btnAddProd">+</button>
+              </router-link>
+            </div>
           </li>
         </ul>
       </div>
@@ -92,27 +99,41 @@ export default {
       border-right: solid 1px #2c3e50;
     }
     #id {
-      min-width: 10%;
+      min-width: 8%;
       border-left: none;
     }
     #nome {
-      min-width: 50%;
+      min-width: 45%;
       border: none;
     }
     #descricao {
       color: #f4c54c;
-      min-width: 50%;
+      min-width: 38%;
       border: none;
     }
     #estoque {
-      min-width: 10%;
+      min-width: 8%;
     }
     #preco {
-      min-width: 14%;
+      min-width: 8%;
       border-right: none;
       border-left: none;
-      min-width: 100px;
+    }
+    .btnAddProd{
+      height: 27px;
+      background-color: #ffc107;
+      border: none;
+      border-radius: 2px;
+    }
+    .btnDiv{
+      width: 11%;
+      border-right: none;
+    }
+    #acao{
+      border-right: none;
+      min-width: 11%;
     }
   }
+  
 }
 </style>

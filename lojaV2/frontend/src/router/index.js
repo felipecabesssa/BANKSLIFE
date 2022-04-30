@@ -23,6 +23,11 @@ const routes = [
     component: () => import('../views/produtos/ProdutosAdd.vue')
   },
   {
+    path: '/atualiza',
+    name: 'atualiza',
+    component: () => import('../views/produtos/ProdutosAtualiza.vue')
+  },
+  {
     path: '/categorias',
     name: 'categorias',
     component: () => import('../views/categorias/Categorias.vue')
