@@ -16,7 +16,7 @@
             <div class="dados" id="descricao"><strong>Descrição</strong></div>
             <div class="dados" id="estoque"><strong>Qtd</strong></div>
             <div class="dados" id="preco"><strong>Preço</strong></div>
-            <div class="dados" id="acao"><strong>Editar</strong></div>
+            <div class="dados" id="acao"><strong>Ação</strong></div>
           </li>
         </ul>
       </div>
@@ -28,11 +28,12 @@
             <div class="dados" id="nome">{{ dado.nome }}</div>
             <div class="dados" id="estoque">{{ dado.quantidade }}</div>
             <div class="dados" id="preco">{{ dinheiro(dado.preco) }}</div>
-            <!-- <div class="dados" id="acao"></div> -->
+            <!-- <div class="dados" id="acao"></div> --> 
             <div class="dados btnDiv" id="acao">
               <router-link v-bind:to="{ name: 'atualiza', params: { id: dado.id } }">
                 <button class="btnAddProd">&#10227;</button>
               </router-link>
+              <button v-on:click="excluirProduto(dado.id)" class="btnDelete">x</button>
             </div>
           </li>
         </ul>
@@ -55,10 +56,22 @@ export default {
     };
   },
   methods: {
-    ...mapActions('produtos', ['getProdutos']),
+    ...mapActions('produtos', ['getProdutos', 'deletaProdutos']),
     dinheiro(valor) {
       return "R$ " + valor.toFixed(2);
     },
+
+    async excluirProduto(id){
+      try{
+        await this.deletaProdutos(id)
+        // this.getProdutos()
+        this.$router.go()
+      }
+      catch(err){
+        alert('Não foi possível excluir ' + err)
+      }
+    }
+
   },
   computed:{
     ...mapState(['produtos'])
@@ -122,6 +135,14 @@ export default {
     .btnAddProd{
       height: 27px;
       background-color: #ffc107;
+      border: none;
+      border-radius: 2px;
+    }
+    .btnDelete{
+      color: #fff;
+      margin-left: 5px;
+      height: 27px;
+      background-color: red;
       border: none;
       border-radius: 2px;
     }
