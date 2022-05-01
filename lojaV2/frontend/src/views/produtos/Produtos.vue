@@ -1,5 +1,5 @@
 <template>
-  <div class="principal">
+  <div>
     <img alt="Vue logo" src="../../assets/logo.png" width="150" />
     
     <div class="principal">
@@ -16,7 +16,7 @@
             <div class="dados" id="descricao"><strong>Descrição</strong></div>
             <div class="dados" id="estoque"><strong>Qtd</strong></div>
             <div class="dados" id="preco"><strong>Preço</strong></div>
-            <div class="dados" id="acao"><strong>Add</strong></div>
+            <div class="dados" id="acao"><strong>Editar</strong></div>
           </li>
         </ul>
       </div>
@@ -29,9 +29,9 @@
             <div class="dados" id="estoque">{{ dado.quantidade }}</div>
             <div class="dados" id="preco">{{ dinheiro(dado.preco) }}</div>
             <!-- <div class="dados" id="acao"></div> -->
-            <div class="dados btnDiv">
+            <div class="dados btnDiv" id="acao">
               <router-link v-bind:to="{ name: 'atualiza', params: { id: dado.id } }">
-                <button class="btnAddProd">+</button>
+                <button class="btnAddProd">&#10227;</button>
               </router-link>
             </div>
           </li>
@@ -103,19 +103,19 @@ export default {
       border-left: none;
     }
     #nome {
-      min-width: 50%;
+      min-width: 40%;
       border: none;
     }
     #descricao {
       color: #f4c54c;
-      min-width: 50%;
+      min-width: 40%;
       border: none;
     }
     #estoque {
       min-width: 8%;
     }
     #preco {
-      min-width: 8%;
+      min-width: 5%;
       border-right: none;
       border-left: none;
     }
@@ -131,7 +131,7 @@ export default {
     }
     #acao{
       border-right: none;
-      min-width: 11%;
+      min-width: 15%;
     }
   }
   

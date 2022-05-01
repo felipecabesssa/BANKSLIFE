@@ -1,11 +1,13 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" width="150" />
-    <h1>Home</h1>
-  </div>
+  <div class="fundo">
+    <div class="home">
+      <img alt="Vue logo" src="../assets/logo.png" width="150" />
+      <h1>Home</h1>
+    </div>
 
-  <div class="container">
-    <h1>teste</h1>
+    <div class="container">
+      <h1>teste</h1>
+    </div>
   </div>
 
   

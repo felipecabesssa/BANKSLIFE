@@ -1,6 +1,14 @@
 <template>
   <div class="main" v-for="product in produtos" :key="product.id">
       <h2>Atualizar Produto</h2>
+
+      <div class="alert alert-success" v-if="ok">
+        <h4>Dados atualizados com sucesso!</h4>
+      </div>
+      <div v-else>
+        <h4>{{ message }}</h4>
+      </div>
+
       <div class="container">
         <div class="form">
           <div class="row">
@@ -28,7 +36,9 @@ import { mapState, mapActions } from 'vuex'
 export default {
   data(){
     return {
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      message: '',
+      ok: false
     }
   },
   computed: {
@@ -37,14 +47,20 @@ export default {
   methods:{
     ...mapActions('produtos', ['findProdutosById', 'atualizaProdutos']),
 
-    atualizaProduto(product){
+    async atualizaProduto(product){
       const update = {
         id:product.id,
         nome:product.nome,
         quantidade:product.quantidade,
         preco:product.preco
+      };
+      try{
+        await this.atualizaProdutos(update)
+        this.ok = true
       }
-      this.atualizaProdutos(update)
+      catch(err){
+        err.data ? this.message = err.data.message : this.message = 'Não foi possível atualizar'
+      }
     }
   },
 

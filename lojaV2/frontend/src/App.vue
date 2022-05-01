@@ -26,6 +26,7 @@ export default {
   text-align: center;
   color: #f4c54c;
   background-color: #0d1117;
+  min-height: 950px;
 }
 
 nav {
