@@ -1,8 +1,25 @@
 <template>
-  <div class="main">
+  <div class="main" v-for="product in produtos" :key="product.id">
       <h2>Atualizar Produto</h2>
-      {{ produtos }}
-      <h3>{{ id }}</h3>
+      <div class="container">
+        <div class="form">
+          <div class="row">
+              <label for="">Descrição</label>
+              <input v-model="product.nome" type="text">
+          </div>
+          <div class="row">
+              <label for="">Quantidade</label>
+              <input v-model="product.quantidade" type="text">
+          </div>
+          <div class="row">
+              <label for="">Preço</label>
+              <input v-model="product.preco" type="text">
+          </div>
+          <div class="botao mt-3 mb-3">
+              <button v-on:click="atualizaProduto(product)" class="btn btn-warning">Atualizar</button>
+          </div>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -18,7 +35,17 @@ export default {
     ...mapState(['produtos'])
   },
   methods:{
-    ...mapActions('produtos', ['findProdutosById'])
+    ...mapActions('produtos', ['findProdutosById', 'atualizaProdutos']),
+
+    atualizaProduto(product){
+      const update = {
+        id:product.id,
+        nome:product.nome,
+        quantidade:product.quantidade,
+        preco:product.preco
+      }
+      this.atualizaProdutos(update)
+    }
   },
 
   created(){
@@ -28,5 +55,10 @@ export default {
 </script>
 
 <style>
+
+.row{
+    text-align: left;
+}
+
 
 </style>

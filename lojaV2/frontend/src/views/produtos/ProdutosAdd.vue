@@ -3,21 +3,23 @@
 
   <div class="main">
     <h1>Novos Produtos</h1>
-    <div class="form">
-        <div class="row">
-            <label for="">Descrição</label>
-            <input v-model="form.nome" type="text">
-        </div>
-        <div class="row">
-            <label for="">Quantidade</label>
-            <input v-model="form.quantidade" type="text">
-        </div>
-        <div class="row">
-            <label for="">Preço</label>
-            <input v-model="form.preco" type="text">
-        </div>
-        <div class="botao">
-            <button v-on:click="addProducts" class="btn btn-warning">Cadastrar</button>
+    <div class="container">
+        <div class="form">
+            <div class="row">
+                <label for="">Descrição</label>
+                <input v-model="form.nome" type="text">
+            </div>
+            <div class="row">
+                <label for="">Quantidade</label>
+                <input v-model="form.quantidade" type="text">
+            </div>
+            <div class="row">
+                <label for="">Preço</label>
+                <input v-model="form.preco" type="text">
+            </div>
+            <div class="botao mt-3 mb-3">
+                <button v-on:click="addProducts" class="btn btn-warning">Cadastrar</button>
+            </div>
         </div>
     </div>
   </div>
@@ -58,6 +60,9 @@ export default {
 
 <style lang="scss" scoped>
 
+.row{
+    text-align: left;
+}
 label{
     padding: 5px;
 }

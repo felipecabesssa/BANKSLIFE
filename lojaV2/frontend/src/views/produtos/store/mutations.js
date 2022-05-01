@@ -9,5 +9,8 @@ export default {
     },
     [types.FIND_PRODUTOS](state, payload){
         state.produtos = payload
+    },
+    [types.UPDATE_PRODUTOS](state, payload){
+        state.produtos = payload
     }
 }

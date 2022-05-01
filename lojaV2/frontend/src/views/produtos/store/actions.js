@@ -18,3 +18,9 @@ export const findProdutosById = ( { commit }, id ) => {
         commit(types.FIND_PRODUTOS, resp.data)
     })
 }
+
+export const atualizaProdutos = ( { commit }, add ) => {
+    Axios.put('http://localhost:8081/produtos/' + add.id, add).then(resp => {
+        commit(types.UPDATE_PRODUTOS, resp.data)
+    })
+}

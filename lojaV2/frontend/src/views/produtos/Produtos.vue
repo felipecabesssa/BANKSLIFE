@@ -103,12 +103,12 @@ export default {
       border-left: none;
     }
     #nome {
-      min-width: 45%;
+      min-width: 50%;
       border: none;
     }
     #descricao {
       color: #f4c54c;
-      min-width: 38%;
+      min-width: 50%;
       border: none;
     }
     #estoque {
