@@ -18,6 +18,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.bankslife.backend.entities.Produto;
 import br.com.bankslife.backend.services.ProdutoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @CrossOrigin(origins ="*" )
@@ -27,18 +30,21 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoService service;
 	
+	@ApiOperation(value="Retorna todos Produtos")
 	@GetMapping
 	public ResponseEntity<List<Produto>> findAll(){
 		List<Produto> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@ApiOperation(value="Busca Produto por id")
 	@GetMapping(path = {"/{id}"})
 	public ResponseEntity<?> findById(@PathVariable Long id){
 		Produto list = service.findById(id);
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@ApiOperation(value="Insere Produto")
 	@PostMapping
 	public ResponseEntity<Produto> create(@RequestBody Produto produto){
 		produto = service.save(produto);
@@ -46,12 +52,16 @@ public class ProdutoController {
 		return ResponseEntity.created(uri).body(produto);
 	}
 	
+	@ApiOperation(value="Atualiza Produto")
 	@RequestMapping(value = {"/{id}"}, method = RequestMethod.PUT)
 	public ResponseEntity<Produto> update(@RequestBody Produto produto, @PathVariable Long id){
 		produto = service.update(produto, id);
 		return ResponseEntity.noContent().build();
 	}
 	
+	@ApiOperation(value="Remove Produto")
+	@ApiResponses(value = {
+			@ApiResponse(code = 404, message = "Código inexistente") }) //Mensagem de resposta especifica ao invés de Global
 	@DeleteMapping(value = {"/{id}"})
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		service.delete(id);
