@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class JwtAuthenticateController {
 
 	private List<Users> usuarios = new ArrayList<>();
+	private String token;
 	
 	@Autowired
 	private UsersRepository repository;
@@ -26,6 +27,9 @@ public class JwtAuthenticateController {
 	
 	@Autowired
 	private JwtUserDetailsService jwtUserDetailsService;
+	
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
 	
 	@CrossOrigin
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -45,9 +49,13 @@ public class JwtAuthenticateController {
 				final UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(
 						authenticateRequest.getUsername());
 				
-				System.out.println(userDetails);
+//				System.out.println(userDetails);
+//				return usuario.getUsername() + " OK! ";
 				
-				return usuario.getUsername() + " OK! ";
+				this.token = jwtTokenUtil.generateToken(userDetails);
+				
+				return this.token;				
+
 			}
 		}
 		
