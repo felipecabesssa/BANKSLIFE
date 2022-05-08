@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,9 @@ public class JwtAuthenticateController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private JwtUserDetailsService jwtUserDetailsService;
+	
 	@CrossOrigin
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String createAuthenticeToken(@RequestBody Users authenticateRequest) {
@@ -33,10 +37,15 @@ public class JwtAuthenticateController {
 				
 				//O matches compara pela referencia, e nao pelo conteudo, os sysos abaixo testam e mostram isso
 				
-				var testeRequest = passwordEncoder.encode(authenticateRequest.getPassword());
+//				var testeRequest = passwordEncoder.encode(authenticateRequest.getPassword());
+//				
+//				System.out.println(testeRequest);
+//				System.out.println(usuario.getPassword());
 				
-				System.out.println(testeRequest);
-				System.out.println(usuario.getPassword());
+				final UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(
+						authenticateRequest.getUsername());
+				
+				System.out.println(userDetails);
 				
 				return usuario.getUsername() + " OK! ";
 			}
