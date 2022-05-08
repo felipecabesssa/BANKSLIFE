@@ -80,6 +80,7 @@ public class JwtTokenUtil implements Serializable{
 	// while creating the token -
 	// 1. Define claims of the token, like Issuer, Expiration, Subject, and the ID
 	// 2. Sign the JWT using the HS512 algorithm and secret key.
+	@SuppressWarnings("deprecation")
 	private String doGenerateToken(Map<String, Object> claims, String subject) {
 		try {
 			chave = getaHashSenha(secretKey);
