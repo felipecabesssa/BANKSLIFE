@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +20,24 @@ public class JwtAuthenticateController {
 	@Autowired
 	private UsersRepository repository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@CrossOrigin
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String createAuthenticeToken(@RequestBody Users authenticateRequest) {
 		usuarios = repository.findAll();
 		for(Users usuario: usuarios) {
-			if(usuario.getUsername().equals(authenticateRequest.getUsername())
-					&& usuario.getPassword().equals(authenticateRequest.getPassword())) {
+			if(usuario.getUsername().equals(authenticateRequest.getUsername()) && 
+					passwordEncoder.matches(authenticateRequest.getPassword(), usuario.getPassword())) {
+				
+				//O matches compara pela referencia, e nao pelo conteudo, os sysos abaixo testam e mostram isso
+				
+				var testeRequest = passwordEncoder.encode(authenticateRequest.getPassword());
+				
+				System.out.println(testeRequest);
+				System.out.println(usuario.getPassword());
+				
 				return usuario.getUsername() + " OK! ";
 			}
 		}

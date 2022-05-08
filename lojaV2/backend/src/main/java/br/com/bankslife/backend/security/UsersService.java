@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,26 +20,38 @@ public class UsersService {
 	@Autowired
 	private UsersRepository repository;
 
+	@CrossOrigin
 	@GetMapping
 	public List<Users> findAll(){
 		return repository.findAll();
 	}
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	private String senhaComHash;
+	
+	@CrossOrigin
 	public ResponseEntity<?> findById(@PathVariable long id){
 		return repository.findById(id).map(response -> ResponseEntity.ok().body(response)).orElse(ResponseEntity.notFound().build());
 	}
 	
+	@CrossOrigin
 	@PostMapping
 	public Users create(@RequestBody Users users) {
+		this.senhaComHash = passwordEncoder.encode(users.getPassword());
+		users.setPassword(this.senhaComHash);
 		return repository.save(users);
 	}
 	
+	@CrossOrigin
 	@RequestMapping(value = {"/{id}"}, method = RequestMethod.PUT)
 	public Users update(@RequestBody Users users, @PathVariable long id) {
 		users.setId(id);
 		return repository.save(users);
 	}
 	
+	@CrossOrigin
 	public ResponseEntity<?> delete (@PathVariable long id){
 		repository.deleteById(id);
 		return null;
