@@ -3,17 +3,34 @@
       <div class="login">
         <h2>Login</h2>
         <label for="username">Usuario</label>
-        <input type="text">
+        <input v-model="username" type="text">
         <label for="password">Senha</label>
-        <input type="password">
-        <button class="btn btn-warning">Logar</button>
+        <input v-model="password" type="password">
+        <button v-on:click="enviarDadosLogin" class="btn btn-warning">Logar</button>
       </div>
   </div>
 </template>
 
 <script>
+import Axios from 'axios'
 export default {
-
+    data(){
+        return{
+            username: '',
+            password: ''
+        }
+    },
+    methods:{
+        enviarDadosLogin(){
+            const dados = {
+                username: this.username,
+                password: this.password
+            }
+            Axios.post('http://localhost:8081/login', dados).then(response => {
+                console.log(response.data)
+            });
+        }
+    }
 }
 </script>
 
