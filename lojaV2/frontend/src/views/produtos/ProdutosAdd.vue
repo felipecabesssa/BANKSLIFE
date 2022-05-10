@@ -60,6 +60,9 @@ export default {
 
 <style lang="scss" scoped>
 
+.form{
+    padding: 3%;
+}
 .row{
     text-align: left;
 }

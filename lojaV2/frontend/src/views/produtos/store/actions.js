@@ -10,25 +10,33 @@ export const getProdutos = ({ commit }) => {
 }
 
 export const addProdutos = ({ commit }, add) => {
-    Axios.post('http://localhost:8081/produtos', add).then((resp) => {
+    var token = localStorage.getItem('token')
+    const headers = { Authorization: `Bearer ${token}` }
+    Axios.post('http://localhost:8081/produtos', add, { headers }).then((resp) => {
         commit(types.ADD_PRODUTOS, resp.data)
     })
 }
 
 export const findProdutosById = ( { commit }, id ) => {
-    Axios.get('http://localhost:8081/produtos/' + id).then(resp => {
+    var token = localStorage.getItem('token')
+    const headers = { Authorization: `Bearer ${token}` }
+    Axios.get('http://localhost:8081/produtos/' + id, { headers }).then(resp => {
         commit(types.FIND_PRODUTOS, resp.data)
     })
 }
 
 export const atualizaProdutos = ( { commit }, add ) => {
-    Axios.put('http://localhost:8081/produtos/' + add.id, add).then(resp => {
+    var token = localStorage.getItem('token')
+    const headers = { Authorization: `Bearer ${token}` }
+    Axios.put('http://localhost:8081/produtos/' + add.id, add, { headers }).then(resp => {
         commit(types.UPDATE_PRODUTOS, resp.data)
     })
 }
 
-export const deletaProdutos = ( { commit }, id ) => [
-    Axios.delete('http://localhost:8081/produtos/' + id).then(resp => {
+export const deletaProdutos = ( { commit }, id ) => {
+    var token = localStorage.getItem('token')
+    const headers = { Authorization: `Bearer ${token}` }
+    Axios.delete('http://localhost:8081/produtos/' + id, { headers }).then(resp => {
         commit(types.DELETE_PRODUTOS, resp.data)
     })
-]
+}
