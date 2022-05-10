@@ -27,7 +27,8 @@ export default {
                 password: this.password
             }
             Axios.post('http://localhost:8081/login', dados).then(response => {
-                console.log(response.data)
+                localStorage.setItem('token', response.data)
+                this.$router.push('/')
             });
         }
     }

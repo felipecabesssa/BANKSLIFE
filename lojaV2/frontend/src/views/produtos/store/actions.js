@@ -2,7 +2,9 @@ import * as types from './mutation-types'
 import Axios from 'axios'
 
 export const getProdutos = ({ commit }) => {
-    Axios.get('http://localhost:8081/produtos').then((resp) => {
+    var token = localStorage.getItem('token')
+    const headers = { Authorization: `Bearer ${token}` }
+    Axios.get('http://localhost:8081/produtos', { headers }).then((resp) => {
         commit(types.GET_PRODUTOS, resp.data)
     })
 }
