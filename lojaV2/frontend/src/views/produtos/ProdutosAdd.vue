@@ -15,7 +15,7 @@
             </div>
             <div class="row">
                 <label for="">Preço</label>
-                <input v-model="form.preco" type="text">
+                <input v-model="preco" v-money="money" type="text">
             </div>
             <div class="botao mt-3 mb-3">
                 <button v-on:click="addProducts" class="btn btn-warning">Cadastrar</button>
@@ -26,14 +26,24 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
+import {VMoney} from 'v-money'
 export default {
+    directives: {money: VMoney},
     data(){
         return{
             form:{
                 nome: '',
-                quantidade: '',
-                preco: ''
+                quantidade: ''
+            },
+            preco: 0,
+            money: {
+                decimal: ',',
+                thousands: '.',
+                prefix: 'R$ ',
+                suffix: '',
+                precision: 2,
+                masked: false /* doesn't work with directive */
             }
         }
     },
@@ -41,16 +51,18 @@ export default {
         ...mapActions('produtos', ['addProdutos']),
         
         addProducts(add){
+            this.preco = this.preco.replace(/\./g, '')
+            this.preco = this.preco.slice(3).replace(',', '.')
+
             add = {
                 nome:this.form.nome,
                 quantidade:this.form.quantidade,
-                preco:this.form.preco
+                preco:this.preco
             }
             this.addProdutos(add)
-
             this.form.nome = ''
             this.form.quantidade = ''
-            this.form.preco = ''
+            this.preco = ''
         }
 
     }
