@@ -31,9 +31,9 @@
             <!-- <div class="dados" id="acao"></div> --> 
             <div class="dados btnDiv" id="acao">
               <router-link v-bind:to="{ name: 'atualiza', params: { id: dado.id } }">
-                <button class="btnAddProd">&#10227;</button>
+                <button class="btnAddProd"><!--&#10227;--><i class="fa-solid fa-pen-to-square"></i></button>
               </router-link>
-              <button v-on:click="excluirProduto(dado.id)" class="btnDelete">x</button>
+              <button v-on:click="excluirProduto(dado.id)" class="btnDelete"><i class="fa-solid fa-trash-can"></i></button>
             </div>
           </li>
         </ul>
@@ -129,7 +129,7 @@ export default {
       min-width: 8%;
     }
     #preco {
-      min-width: 5%;
+      min-width: 16%;
       border-right: none;
       border-left: none;
     }
@@ -148,12 +148,12 @@ export default {
       border-radius: 2px;
     }
     .btnDiv{
-      width: 11%;
+      width: 16%;
       border-right: none;
     }
     #acao{
       border-right: none;
-      min-width: 15%;
+      min-width: 16%;
     }
   }
   
