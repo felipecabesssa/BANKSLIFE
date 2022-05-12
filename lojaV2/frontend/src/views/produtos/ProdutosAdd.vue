@@ -13,6 +13,25 @@
                 <label for="">Quantidade</label>
                 <input v-model="form.quantidade" type="text">
             </div>
+
+            <div class="row mt-3">
+                <label for="">Selecione a Categoria</label>
+                <select id="categorias" v-model="form.categoria">
+                <option value="1">
+                    Shapes
+                </option>
+                <option value="2">
+                    Trucks
+                </option>
+                <option value="3">
+                    Rodas
+                </option>
+                <option value="4">
+                    Acessórios
+                </option>
+                </select>
+            </div>
+
             <div class="row">
                 <label for="">Preço</label>
                 <input v-model="preco" v-money="money" type="text">
@@ -34,7 +53,8 @@ export default {
         return{
             form:{
                 nome: '',
-                quantidade: ''
+                quantidade: '',
+                categoria:''
             },
             preco: 0,
             money: {
@@ -57,8 +77,10 @@ export default {
             add = {
                 nome:this.form.nome,
                 quantidade:this.form.quantidade,
-                preco:this.preco
+                preco:this.preco,
+                categoria: { id: parseInt(this.form.categoria) }
             }
+            // console.log(add) - teste de inclusao no console
             this.addProdutos(add)
             this.form.nome = ''
             this.form.quantidade = ''
