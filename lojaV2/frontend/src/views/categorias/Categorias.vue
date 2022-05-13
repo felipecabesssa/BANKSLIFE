@@ -84,8 +84,16 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    ul{
-      list-style: none;
+    width: 100%;
+    .produtos{
+      width: 100%;
+      ul{
+        padding-top: 5px;
+        width: 100%;
+        display: flex;
+        list-style: none;
+        border-bottom: solid 1px $dark;
+      }
     }
   }
 }
@@ -102,14 +110,5 @@ export default {
   border: none;
   color: $warning;
   background-color: $dark;
-}
-
-.produtos{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-    input{
-      border-bottom: solid 1px #2c3e50;
-    }
 }
 </style>
