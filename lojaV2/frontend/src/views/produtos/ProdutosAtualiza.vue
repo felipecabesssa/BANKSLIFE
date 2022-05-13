@@ -11,6 +11,25 @@
 
       <div class="container">
         <div class="form">
+
+          <div class="row">
+            <label for="">Selecione a Categoria</label>
+            <select id="categorias" v-model="product.categoria">
+            <option value="1">
+                Shapes
+            </option>
+            <option value="2">
+                Trucks
+            </option>
+            <option value="3">
+                Rodas
+            </option>
+            <option value="4">
+                Acessórios
+            </option>
+            </select>
+          </div>
+
           <div class="row">
               <label for="">Descrição</label>
               <input v-model="product.nome" type="text">
@@ -24,7 +43,7 @@
               <input v-model.lazy="product.preco" v-money="money" type="text">
           </div>
           <div class="botao mt-3 mb-3">
-              <button v-on:click="atualizaProduto(product)" class="btn btn-warning">Atualizar</button>
+              <button v-on:click="atualizaProduto(product, product.preco)" class="btn btn-warning">Atualizar</button>
           </div>
         </div>
       </div>
@@ -58,12 +77,15 @@ export default {
   methods:{
     ...mapActions('produtos', ['findProdutosById', 'atualizaProdutos']),
 
-    async atualizaProduto(product){
+    async atualizaProduto(product, price){
+      price = price.replace(/\./g, '')
+      price = price.slice(3).replace(',', '.')
       const update = {
-        id:product.id,
-        nome:product.nome,
-        quantidade:product.quantidade,
-        preco:product.preco
+        id: product.id,
+        nome: product.nome,
+        quantidade: product.quantidade,
+        preco: price,
+        categoria: { id: product.categoria }
       };
       try{
         await this.atualizaProdutos(update)

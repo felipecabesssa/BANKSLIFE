@@ -25,7 +25,8 @@ export const findProdutosById = ( { commit }, id ) => {
             id: resp.data.id,
             nome: resp.data.nome,
             quantidade: resp.data.quantidade,
-            preco: resp.data.preco.toFixed(2)
+            preco: resp.data.preco.toFixed(2),
+            categoria: resp.data.categoria.id
         }
         commit(types.FIND_PRODUTOS, dados);
     })
