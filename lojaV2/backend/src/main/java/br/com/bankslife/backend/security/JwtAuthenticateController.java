@@ -2,6 +2,7 @@ package br.com.bankslife.backend.security;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ public class JwtAuthenticateController {
 
 	private List<Users> usuarios = new ArrayList<>();
 	private String token;
+	private Long id;
 	
 	@Autowired
 	private UsersRepository repository;
@@ -33,7 +35,7 @@ public class JwtAuthenticateController {
 	
 	@CrossOrigin
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String createAuthenticeToken(@RequestBody Users authenticateRequest) {
+	public Optional<Users> createAuthenticeToken(@RequestBody Users authenticateRequest) {
 		usuarios = repository.findAll();
 		for(Users usuario: usuarios) {
 			if(usuario.getUsername().equals(authenticateRequest.getUsername()) && 
@@ -53,12 +55,17 @@ public class JwtAuthenticateController {
 //				return usuario.getUsername() + " OK! ";
 				
 				this.token = jwtTokenUtil.generateToken(userDetails);
-				
-				return this.token;				
+				this.id = usuario.getId();
+							
 
 			}
 		}
 		
-		return "Error";
+		Optional<Users> obj = null;
+		obj = repository.findById(this.id);
+		obj.orElseThrow().setToken(token);
+		obj.orElseThrow().setPassword("");
+		return obj;
+		
 	}
 }
