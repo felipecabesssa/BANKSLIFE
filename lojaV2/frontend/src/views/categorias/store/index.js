@@ -20,6 +20,6 @@ export default {
                 commit('getCategoriasM', resp.data)
             })
         }
-    }
-
+    },
+    namespaced:true
 }

@@ -7,23 +7,17 @@
         <div class="dados">{{ categoria.id }}</div>
         <div class="dados">{{ categoria.nome }}</div>
       </div>
-      <!-- <div class="vuex">
-        {{ count }}
-        <button class="btn btn-warning" v-on:click="increments">+</button>
-        <button class="btn btn-warning" v-on:click="decrement">-</button>
-      </div> -->
+      <div class="row" v-for="products in produtos.produtos" :key="products.id">
+        <div v-if="products.categoria" class="produtos">
+          {{ products }}
+        </div>
+      </div>
       <hr>
-      <!-- <div class="produtos">
-        {{ produtos }}
-        <input v-model="products" class="form-control form-control-sm" type="text">
-        <button class="btn btn-warning" v-on:click="addProducts(products)">+</button>
-      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-// import axios from 'axios'
 import { mapState, mapActions } from 'vuex'
 export default {
   data(){
@@ -32,19 +26,15 @@ export default {
     }
   },
   methods:{
-    // getCategorias(){
-    //   axios.get('http://localhost:8081/categorias').then(resp => {
-    //     this.categorias = resp.data
-    //   })
-    // },
-    
-    ...mapActions(['getCategorias'])
+    ...mapActions('categorias',['getCategorias']),
+    ...mapActions('produtos',['getProdutos'])
   },
   created(){
-    this.getCategorias()
+    this.getCategorias(),
+    this.getProdutos()
   },
   computed:{
-    ...mapState(['categorias'])
+    ...mapState(['categorias', 'produtos'])
   }
 };
 </script>
@@ -63,6 +53,11 @@ export default {
     .dados {
       padding: 1%;
     }
+  }
+  .row{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 

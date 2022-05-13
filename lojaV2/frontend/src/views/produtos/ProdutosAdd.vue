@@ -5,16 +5,8 @@
     <h1>Novos Produtos</h1>
     <div class="container">
         <div class="form">
-            <div class="row">
-                <label for="">Descrição</label>
-                <input v-model="form.nome" type="text">
-            </div>
-            <div class="row">
-                <label for="">Quantidade</label>
-                <input v-model="form.quantidade" type="text">
-            </div>
 
-            <div class="row mt-3">
+            <div class="row">
                 <label for="">Selecione a Categoria</label>
                 <select id="categorias" v-model="form.categoria">
                 <option value="1">
@@ -30,6 +22,15 @@
                     Acessórios
                 </option>
                 </select>
+            </div>
+
+            <div class="row">
+                <label for="">Descrição</label>
+                <input v-model="form.nome" type="text">
+            </div>
+            <div class="row">
+                <label for="">Quantidade</label>
+                <input v-model="form.quantidade" type="text">
             </div>
 
             <div class="row">
