@@ -5,13 +5,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.bankslife.backend.security.requests.JwtRequest;
 
 @CrossOrigin
 @RestController
@@ -25,39 +30,27 @@ public class JwtAuthenticateController {
 	private UsersRepository repository;
 	
 	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
 	private JwtUserDetailsService jwtUserDetailsService;
 	
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 	
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
 	@CrossOrigin
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public Optional<Users> createAuthenticeToken(@RequestBody Users authenticateRequest) {
+	public Optional<Users> createAuthenticeToken(@RequestBody JwtRequest authenticateRequest) throws Exception {
 		usuarios = repository.findAll();
 		for(Users usuario: usuarios) {
-			if(usuario.getUsername().equals(authenticateRequest.getUsername()) && 
-					passwordEncoder.matches(authenticateRequest.getPassword(), usuario.getPassword())) {
-				
-				//O matches compara pela referencia, e nao pelo conteudo, os sysos abaixo testam e mostram isso
-				
-//				var testeRequest = passwordEncoder.encode(authenticateRequest.getPassword());
-//				
-//				System.out.println(testeRequest);
-//				System.out.println(usuario.getPassword());
+			if(usuario.getUsername().equals(authenticateRequest.getUsername())) {
+				authenticate(authenticateRequest.getUsername(), authenticateRequest.getPassword());
 				
 				final UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(
 						authenticateRequest.getUsername());
 				
-//				System.out.println(userDetails);
-//				return usuario.getUsername() + " OK! ";
-				
 				this.token = jwtTokenUtil.generateToken(userDetails);
 				this.id = usuario.getId();
-							
-
 			}
 		}
 		
@@ -66,6 +59,19 @@ public class JwtAuthenticateController {
 		obj.orElseThrow().setToken(token);
 		obj.orElseThrow().setPassword("");
 		return obj;
-		
+	}
+	
+	private void authenticate(String username, String password) throws Exception{
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			
+		} catch (DisabledException e) {
+			
+			throw new Exception("USER_DISABLED", e);
+			
+		} catch (BadCredentialsException e) {
+			
+			throw new Exception("INVALID_CREDENTIALS", e);
+		}
 	}
 }
