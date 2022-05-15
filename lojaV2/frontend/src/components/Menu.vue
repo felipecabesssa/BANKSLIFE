@@ -7,10 +7,10 @@
       <router-link to="/about">
         <li>Sobre</li>
       </router-link>
-      <router-link to="/categorias">
+      <router-link v-if="token" to="/categorias">
         <li>Categorias</li>
       </router-link>
-      <router-link to="/produtos">
+      <router-link v-if="token" to="/produtos">
         <li>Produtos</li>
       </router-link>
     </ul>
@@ -18,7 +18,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed:{
+    username(){
+      return localStorage.username
+    },
+    token(){
+      return localStorage.token
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
