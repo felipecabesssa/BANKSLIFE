@@ -7,10 +7,10 @@
       <router-link to="/about">
         <li>Sobre</li>
       </router-link>
-      <router-link v-if="token" to="/categorias">
+      <router-link v-if="session || token" to="/categorias">
         <li>Categorias</li>
       </router-link>
-      <router-link v-if="token" to="/produtos">
+      <router-link v-if="session || token" to="/produtos">
         <li>Produtos</li>
       </router-link>
     </ul>
@@ -19,12 +19,23 @@
 
 <script>
 export default {
+  data(){
+    return{
+      session: false
+    }      
+  },
   computed:{
     username(){
       return localStorage.username
     },
     token(){
-      return localStorage.token
+      // return localStorage.token
+      return this.$store.state.user.user.token
+    },
+  },
+  mounted(){
+    if(localStorage.token){
+      this.session = true
     }
   }
 };

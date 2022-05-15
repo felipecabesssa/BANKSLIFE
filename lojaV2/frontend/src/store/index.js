@@ -3,6 +3,7 @@
 import { createStore } from 'vuex'
 import { store as produtos } from './../views/produtos'
 import { store as categorias } from './../views/categorias'
+import { store as user } from './../views/login'
 
 // export default createStore({
 //   state: {
@@ -67,7 +68,8 @@ import { store as categorias } from './../views/categorias'
 const store = createStore({
   modules: {
     categorias,
-    produtos
+    produtos,
+    user
   }
 })
 
