@@ -1,17 +1,7 @@
 <template>
 
   <nav>
-    <div class="login">
-      <div class="buttons">
-        <router-link to="/Login">
-          <h6>Login</h6>
-        </router-link>
-
-        <router-link class="btnCadastro" to="#">
-          <h6>Cadastro</h6>
-        </router-link>
-      </div>
-    </div>
+    <MenuLogin/>
     <Menu/>
     <hr>
   </nav>
@@ -22,9 +12,11 @@
 
 <script>
 import Menu from './components/Menu.vue'
+import MenuLogin from './components/MenuLogin.vue'
 export default {
   components:{
-    Menu
+    Menu,
+    MenuLogin
   }
 }
 </script>
@@ -73,6 +65,10 @@ nav {
       display: flex;
       justify-content: flex-end;
       border-bottom: .2px solid #f4c54c;
+      h6{
+        border-right: .2px solid #f4c54c;
+        margin-bottom: -1px;
+      }
     }
     h6{
       padding: 5px;
@@ -81,7 +77,7 @@ nav {
   }
 
   .btnCadastro{
-    margin-left: 10px;
+    margin-left: 2px;
   }
 }
 </style>
