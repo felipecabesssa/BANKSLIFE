@@ -1,6 +1,7 @@
 package br.com.bankslife.backend.security;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +33,9 @@ public class UsersService {
 	private String senhaComHash;
 	
 	@CrossOrigin
-	public ResponseEntity<?> findById(@PathVariable long id){
-		return repository.findById(id).map(response -> ResponseEntity.ok().body(response)).orElse(ResponseEntity.notFound().build());
+	public Users findById(@PathVariable long id){
+		Optional<Users> obj = repository.findById(id);
+		return obj.get();
 	}
 	
 	@CrossOrigin

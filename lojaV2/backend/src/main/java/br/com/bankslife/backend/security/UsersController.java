@@ -2,6 +2,7 @@ package br.com.bankslife.backend.security;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.bankslife.backend.dtos.UserDto;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -30,16 +32,19 @@ public class UsersController {
 	
 	@ApiOperation(value="Retorna todos Userss")
 	@GetMapping
-	public ResponseEntity<List<Users>> findAll(){
-		List<Users> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+	public List<UserDto> findAll(){
+		service.findAll();
+		return service.findAll().stream()
+				.map(user -> new UserDto(user))
+				.collect(Collectors.toList());
 	}
 	
 	@ApiOperation(value="Busca Users por id")
 	@GetMapping(path = {"/{id}"})
-	public ResponseEntity<?> findById(@PathVariable Long id){
-		ResponseEntity<?> list = service.findById(id);
-		return ResponseEntity.ok().body(list);
+	public UserDto findById(@PathVariable Long id){
+		Users user = service.findById(id);
+		UserDto userdto = new UserDto(user);
+		return userdto;
 	}
 	
 	@ApiOperation(value="Insere Users")
