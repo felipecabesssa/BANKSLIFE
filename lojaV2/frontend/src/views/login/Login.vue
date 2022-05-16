@@ -7,6 +7,7 @@
         <label for="password">Senha</label>
         <input v-model="password" type="password">
         <button v-on:click="enviarDadosLogin" class="btn btn-warning">Logar</button>
+        <span><a href="#">Esqueceu a senha ?</a></span>
       </div>
   </div>
 </template>
@@ -40,6 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../scss/colors.scss';
 .main{
     display: flex;
     justify-content: center;
@@ -51,6 +53,16 @@ export default {
         width: 40%;
         button{
             margin-top: 10px;
+        }
+        span{
+            a{
+                text-decoration: none;
+                color: $warning;
+                font-weight: 200;
+            }
+            a:hover{
+                font-weight: 400;
+            }
         }
     }
 }

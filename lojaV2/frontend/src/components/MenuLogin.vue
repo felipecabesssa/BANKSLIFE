@@ -1,14 +1,20 @@
 <template>
   <div class="main">
       <div class="login">
+        <div class="saudacao">
+          
+        </div>
       <div class="buttons">
-        <router-link to="/Login" v-if="!token">
+        <h6 v-if="token || session" class="saudacao">Bem vinda/o - {{ username }}</h6>
+        <router-link to="/Login" v-if="!token && !session">
           <h6>LogIn</h6>
         </router-link>
 
-        <button v-if="token" class="btnLogout" @click="resetLogin">LogOut</button>
+        <button v-if="token || session" class="btnLogout" @click="resetLogin">
+          LogOut
+        </button>
 
-        <router-link class="btnCadastro" to="#">
+        <router-link v-if="!token && !session" class="btnCadastro" to="/cadastro">
           <h6>Cadastro</h6>
         </router-link>
       </div>
@@ -61,5 +67,12 @@ export default {
 .btnLogout:hover{
     color: $warning;
 }
+
+
+.saudacao{
+  font-weight: 300;
+  padding-right: 45%;
+}
+
 
 </style>
