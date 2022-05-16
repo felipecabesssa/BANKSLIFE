@@ -71,7 +71,7 @@ export default {
 
 .saudacao{
   font-weight: 300;
-  padding-right: 45%;
+  padding-right: 30%;
 }
 
 
