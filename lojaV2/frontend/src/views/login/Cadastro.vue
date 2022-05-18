@@ -14,9 +14,29 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
+  data(){
+    return{
+      email: "",
+      username: "",
+      password: "",
+    }
+  },
 
+  computed: {
+    ...mapState(["user"]),
+  },
+
+  methods: {
+    ...mapActions('user', ["userRegisterAction", "emailConfirmed"]),
+
+    async enviarDadosCadastro(){
+      
+    }
+  }
 }
+
 </script>
 
 <style lang="scss" scoped>

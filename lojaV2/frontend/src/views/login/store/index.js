@@ -1,3 +1,5 @@
+import { Axios } from "axios"
+
 export default {
 
     state:{
@@ -6,6 +8,10 @@ export default {
 
     mutations:{
         setUser(state, payload){
+            state.user = payload
+        },
+
+        usersRegisterM(state, payload){
             state.user = payload
         }
     },
@@ -17,6 +23,20 @@ export default {
             const userLogin = { username: username, token: token }
             commit('setUser', userLogin)
         }
+    },
+
+    emailConfirmed({}, email){
+        Axios.post('http://localhost:8081/email', email).then(resp => {
+            const result = resp.data;
+            console.log(result)
+        })
+    },
+
+    userRegisterAction({ commit }, user){
+        Axios.post('http://localhost:8081/users', user).then(resp => {
+            const result = resp.data;
+            commit('usersRegisterM', result)
+        })
     },
 
     namespaced: true

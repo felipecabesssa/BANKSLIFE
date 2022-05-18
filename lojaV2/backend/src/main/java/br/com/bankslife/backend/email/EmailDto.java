@@ -10,7 +10,6 @@ public class EmailDto {
 	}
 
 	public EmailDto(String emailTo, String subject, String text) {
-		super();
 		this.emailTo = emailTo;
 		this.subject = subject;
 		this.text = text;
