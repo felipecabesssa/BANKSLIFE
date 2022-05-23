@@ -50,14 +50,24 @@ public class JwtAuthenticateController {
 						authenticateRequest.getUsername());
 				
 				this.token = jwtTokenUtil.generateToken(userDetails);
+				
 				this.id = usuario.getId();
+				
+				Optional<Users> obj = null;
+				obj = repository.findById(this.id);
+				obj.orElseThrow().setToken(token);
+				obj.orElseThrow().setPassword("");
+				return obj;
 			}
 		}
-		
+		this.id = (long) 1;
 		Optional<Users> obj = null;
 		obj = repository.findById(this.id);
-		obj.orElseThrow().setToken(token);
+		obj.orElseThrow().setId(null);
+		obj.orElseThrow().setToken(null);
+		obj.orElseThrow().setEmail("Erro ao tentar logar");
 		obj.orElseThrow().setPassword("");
+		obj.orElseThrow().setUsername("Usuário ou senha inválidos");
 		return obj;
 	}
 	
