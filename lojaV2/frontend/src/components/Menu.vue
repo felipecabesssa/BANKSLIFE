@@ -7,10 +7,10 @@
       <router-link to="/about">
         <li>Sobre</li>
       </router-link>
-      <router-link v-if="session || token" to="/categorias">
+      <router-link v-if="session || token.length > 12" to="/categorias">
         <li>Categorias</li>
       </router-link>
-      <router-link v-if="session || token" to="/produtos">
+      <router-link v-if="session || token.length > 12" to="/produtos">
         <li>Produtos</li>
       </router-link>
     </ul>

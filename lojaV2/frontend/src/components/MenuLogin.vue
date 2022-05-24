@@ -5,16 +5,16 @@
           
         </div>
       <div class="buttons">
-        <h6 v-if="token || session" class="saudacao">Bem vinda/o - {{ username }}</h6>
-        <router-link to="/Login" v-if="!token && !session">
+        <h6 v-if="token.length > 12 || session" class="saudacao">Bem vinda/o - {{ username }}</h6>
+        <router-link to="/Login" v-if="token.length < 12 && !session">
           <h6>LogIn</h6>
         </router-link>
 
-        <button v-if="token || session" class="btnLogout" @click="resetLogin">
+        <button v-if="token.length > 12 || session" class="btnLogout" @click="resetLogin">
           LogOut
         </button>
 
-        <router-link v-if="!token && !session" class="btnCadastro" to="/cadastro">
+        <router-link v-if="token.length < 12 && !session" class="btnCadastro" to="/cadastro">
           <h6>Cadastro</h6>
         </router-link>
       </div>
