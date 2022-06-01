@@ -25,6 +25,7 @@ export default {
         }
     },
 
+    // eslint-disable-next-line no-empty-pattern
     emailConfirmed({}, email){
         Axios.post('http://localhost:8081/email', email).then(resp => {
             const result = resp.data;

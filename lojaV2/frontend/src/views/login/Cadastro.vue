@@ -3,7 +3,7 @@
       <div class="login">
         <h2>Preencha com seus dados</h2>
         <label for="email">Email:</label>
-        <input v-model="username" type="email">
+        <input v-model="email" type="email">
         <label for="username">Usuario</label>
         <input v-model="username" type="text">
         <label for="password">Senha</label>
@@ -20,7 +20,7 @@ export default {
     return{
       email: "",
       username: "",
-      password: "",
+      password: ""
     }
   },
 
@@ -36,7 +36,7 @@ export default {
       const user = {
         email: this.email,
         username: this.username,
-        password: this.password,
+        password: this.password
       }
       
       await this.userRegisterAction(user);
