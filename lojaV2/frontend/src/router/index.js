@@ -46,6 +46,11 @@ const routes = [
     path: '/registration',
     name: 'registration',
     component: () => import('../views/login/RegistrationConfirmed.vue')
+  },
+  {
+    path: '/upload',
+    name: 'upload',
+    component: () => import('../views/produtos/UploadImages.vue')
   }
 ]
 

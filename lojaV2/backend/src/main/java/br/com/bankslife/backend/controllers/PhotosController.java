@@ -67,9 +67,9 @@ public class PhotosController {
 	@PostMapping(value = {"/{id}"})
 	public String upload(@RequestParam MultipartFile file, @PathVariable long id) {
 		this.save(this.diretorio, file);
-		this.updateProduct(id, this.diretorio);
-		this.setPath(this.raiz + this.diretorio);
-		return getPath();
+		this.updateProduct(id, file.getOriginalFilename());
+		this.setPath(this.raiz + this.diretorio + "/" + file.getOriginalFilename());
+		return file.getOriginalFilename();
 	}
 
 }
