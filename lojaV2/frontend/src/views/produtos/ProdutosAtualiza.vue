@@ -9,6 +9,10 @@
       <h4>{{ message }}</h4>
     </div>
 
+    <div v-if="product.path" class="image">
+      <img :src="'fotos/' + product.path" alt="">
+    </div>
+
     <div class="container">
       <div class="form">
 
@@ -108,7 +112,20 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.main{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .image{
+    max-width: 40%;
+    img{
+      max-width: 50%;
+    }
+  }
+}
+
 
 .row{
     text-align: left;
